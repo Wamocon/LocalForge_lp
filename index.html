@@ -1,0 +1,402 @@
+﻿<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocalForge – Next.js 16 Starter. TypeScript. Supabase. Production-ready.</title>
+  <meta name="description" content="LocalForge ist dein vorkonfiguriertes Next.js-16-Starterprojekt mit TypeScript, Tailwind CSS v4, Supabase und CI/CD-Pipeline – startklar ab dem ersten Commit.">
+  <meta name="keywords" content="next.js 16 starter, typescript boilerplate, supabase starter kit, tailwind css v4 template, next.js app router starter, fullstack starter kit">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="LocalForge / WAMOCON GmbH">
+  <meta name="theme-color" content="#E06820">
+  <link rel="icon" href="app-icon-light.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://localforge.vercel.app/">
+
+  <meta property="og:title" content="LocalForge – Next.js 16. TypeScript. Supabase. Production-ready.">
+  <meta property="og:description" content="Vorkonfigurierter Next.js-16-Starter mit TypeScript strict mode, Tailwind CSS v4, Supabase-Backend und vollständiger CI/CD-Pipeline. Startklar ab dem ersten Commit.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="LocalForge">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LocalForge – Next.js 16 Starter">
+  <meta name="twitter:description" content="Kein Boilerplate-Setup. TypeScript-First. Supabase inklusive. Deploye dein erstes Feature noch heute.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "LocalForge",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "description": "Vorkonfigurierter Next.js-16-Starter mit TypeScript, Tailwind CSS v4, Supabase und CI/CD-Pipeline.",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Kostenlos nutzbar"},
+    "author": {"@type": "Organization", "name": "WAMOCON GmbH"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Welche Vorkenntnisse sind nötig?", "acceptedAnswer": {"@type": "Answer", "text": "Grundkenntnisse in Next.js und TypeScript genügen. Supabase- und Vercel-Konten werden für das Deployment benötigt."}},
+      {"@type": "Question", "name": "Ist LocalForge kostenlos?", "acceptedAnswer": {"@type": "Answer", "text": "Ja, LocalForge ist Open-Source und kostenlos nutzbar. Lediglich Supabase und Vercel haben eigene Preistarife."}},
+      {"@type": "Question", "name": "Kann ich LocalForge mit meinem bestehenden Supabase-Projekt verbinden?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Einfach die Supabase-URL und den Anon Key in .env.local einsetzen und mit npm run dev starten."}},
+      {"@type": "Question", "name": "Unterstützt LocalForge Mehrsprachigkeit?", "acceptedAnswer": {"@type": "Answer", "text": "Ja, die Architektur unterstützt next-intl mit Deutsch und Englisch als Standardsprachen."}}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --color-bg: #f5f5f7;
+      --color-bg-alt: #eeeef0;
+      --color-surface: #ffffff;
+      --color-border: rgba(0,0,0,.08);
+      --color-border-hover: rgba(0,0,0,.14);
+      --color-border-accent: rgba(224,104,32,.18);
+      --color-accent: #E06820;
+      --color-accent-dim: #B85510;
+      --color-accent-soft: rgba(224,104,32,.06);
+      --color-text-main: #111113;
+      --color-muted: #555558;
+      --color-faint: #8e8e93;
+      --font-sans: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text-main); }
+  </style>
+</head>
+
+<body class="overflow-x-hidden antialiased leading-relaxed">
+  <div class="gradient-orbs" aria-hidden="true">
+    <div class="orb orb--1"></div>
+    <div class="orb orb--2"></div>
+    <div class="orb orb--3"></div>
+  </div>
+
+  <div class="fixed top-0 left-0 right-0 z-[60] overflow-hidden" style="height:48px;background:#0a0a0c;border-bottom:1px solid rgba(224,104,32,.25);">
+    <div style="display:flex;align-items:center;height:100%;white-space:nowrap;animation:ticker-scroll 18s linear infinite;">
+      <span class="ticker-item">LOCALFORGE &mdash; TypeScript-First. Supabase. Production-ready.</span>
+      <span class="ticker-item">LOCALFORGE &mdash; TypeScript-First. Supabase. Production-ready.</span>
+      <span class="ticker-item">LOCALFORGE &mdash; TypeScript-First. Supabase. Production-ready.</span>
+      <span class="ticker-item">LOCALFORGE &mdash; TypeScript-First. Supabase. Production-ready.</span>
+    </div>
+  </div>
+
+  <nav class="fixed top-[48px] left-0 right-0 z-50 h-16 flex items-center transition-all duration-400" id="nav">
+    <div class="w-full max-w-[1100px] mx-auto px-5 md:px-10 flex items-center justify-between">
+      <a href="#" class="hover:opacity-70 transition-opacity flex items-center gap-2" style="text-decoration:none;">
+        <img src="app-icon-light.svg" alt="LocalForge Icon" style="width:28px;height:28px;">
+        <span style="font-size:1.5rem;font-weight:900;letter-spacing:-0.5px;color:#E06820;">LocalForge</span>
+      </a>
+      <div class="hidden md:flex items-center gap-4">
+        <div class="nav-links-pill">
+          <a href="#problem" class="nav-link" data-nav-section="problem">Problem</a>
+          <a href="#warum" class="nav-link" data-nav-section="warum">Lösung</a>
+          <a href="#funktionen" class="nav-link" data-nav-section="funktionen">Funktionen</a>
+          <a href="#process" class="nav-link" data-nav-section="process">Prozess</a>
+          <a href="#ablauf" class="nav-link" data-nav-section="ablauf">So geht's</a>
+          <a href="#faq" class="nav-link" data-nav-section="faq">FAQ</a>
+        </div>
+        <a href="https://localforge.vercel.app/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;background:#E06820;color:#fff;font-size:.8rem;font-weight:700;border-radius:999px;text-decoration:none;">App öffnen</a>
+        <div class="flex items-center gap-2 text-sm font-semibold" style="color:var(--color-muted);background:rgba(255,255,255,0.05);padding:6px 12px;border-radius:20px;border:1px solid rgba(224,104,32,.25);">
+          <a href="index.html" style="color:#E06820;text-decoration:none;">DE</a>
+          <span style="opacity:0.3">|</span>
+          <a href="index.en.html" class="hover:text-white transition-colors" style="text-decoration:none;">EN</a>
+        </div>
+      </div>
+      <button class="nav-hamburger md:hidden" id="navHamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div id="mobileMenu" aria-hidden="true">
+    <button style="position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;" onclick="closeMobileMenu()">&times;</button>
+    <div class="mm-brand">LocalForge</div>
+    <div class="mm-grid">
+      <a href="#problem" class="mm-link" onclick="closeMobileMenu()">Problem</a>
+      <a href="#warum" class="mm-link" onclick="closeMobileMenu()">Lösung</a>
+      <a href="#funktionen" class="mm-link" onclick="closeMobileMenu()">Funktionen</a>
+      <a href="#process" class="mm-link" onclick="closeMobileMenu()">Prozess</a>
+      <a href="#ablauf" class="mm-link" onclick="closeMobileMenu()">So geht's</a>
+      <a href="#faq" class="mm-link" onclick="closeMobileMenu()">FAQ</a>
+      <a href="#final-cta" class="mm-link" onclick="closeMobileMenu()">Starten</a>
+    </div>
+    <div style="margin-top:2rem;display:flex;justify-content:center;gap:1.5rem;font-size:1.2rem;font-weight:700;">
+      <a href="index.html" style="color:#E06820;text-decoration:none;">DE</a>
+      <span style="color:var(--color-border);">|</span>
+      <a href="index.en.html" style="color:var(--color-muted);text-decoration:none;">EN</a>
+    </div>
+  </div>
+
+  <section class="relative flex items-center justify-center overflow-hidden pt-[160px] pb-[130px]" id="hero">
+    <canvas id="heroParticles" class="absolute inset-0 z-[1]"></canvas>
+    <div class="absolute inset-0 z-0" style="background:radial-gradient(ellipse 70% 55% at 50% 40%,rgba(224,104,32,.09)0%,transparent 65%),radial-gradient(ellipse 50% 60% at 20% 80%,rgba(224,104,32,.05)0%,transparent 50%),radial-gradient(ellipse 45% 50% at 80% 25%,rgba(95,127,116,.07)0%,transparent 50%);"></div>
+    <div class="absolute inset-0 z-0 opacity-[.06]" style="background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 60% 55% at 50% 50%,black 0%,transparent 70%);"></div>
+
+    <div class="relative z-10 text-center max-w-[960px] px-5">
+      <div class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full mb-7" style="background:rgba(224,104,32,.12);border:1px solid rgba(224,104,32,.35);">
+        <img src="app-icon-light.svg" alt="LocalForge" style="width:16px;height:16px;">
+        <span style="font-size:.8rem;font-weight:700;color:#E8832A;letter-spacing:.06em;text-transform:uppercase;">Next.js 16 &middot; TypeScript &middot; Supabase</span>
+      </div>
+
+      <h1 class="reveal text-3xl md:text-7xl lg:text-8xl font-bold leading-[1.08] tracking-tight mb-6">
+        Dein Stack.<br><span class="gradient-text">Lokal. Typisiert. Einsatzbereit.</span>
+      </h1>
+      <p class="reveal text-lg md:text-xl max-w-[680px] mx-auto leading-relaxed" style="color:var(--color-muted);">
+        LocalForge ist dein vorkonfiguriertes Next.js-16-Starterprojekt mit TypeScript strict mode, Tailwind CSS v4, Supabase-Backend und vollständiger CI/CD-Pipeline – startklar ab dem ersten Commit.
+      </p>
+
+      <div class="reveal mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://localforge.vercel.app/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;background:#E06820;color:#fff;font-size:.95rem;font-weight:700;border-radius:12px;text-decoration:none;transition:all .25s ease;box-shadow:0 4px 24px rgba(224,104,32,.3);">App öffnen</a>
+      </div>
+
+      <p class="reveal mt-5 text-sm" style="color:#8e8e93;">Open-Source. Vollständig typisiert. Sofort deploybar.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-[120px] z-20" style="background:linear-gradient(to bottom, transparent, #0f1117);"></div>
+  </section>
+
+  <section class="relative section-dark" id="problem" style="padding:6.5rem 0 5rem;margin-top:-2px;">
+    <div class="max-w-[1100px] mx-auto px-5 md:px-10">
+      <h2 class="reveal text-4xl md:text-6xl font-black leading-[1.05] tracking-tight mb-6" style="color:#f0f0f2;">
+        Viele Projekte verlieren beim Setup<br><span style="color:#E06820;">wertvolle Entwicklungszeit</span>
+      </h2>
+      <p class="reveal text-lg max-w-[620px] leading-relaxed mb-16" style="color:#9a9aaa;">Diese drei Kennzahlen zeigen, warum ein solider, vorkonfigurierter Dev-Stack entscheidend ist: Wie viel Zeit in Boilerplate fließt, welcher Anteil der Entwickler Infrastruktur als Haupthürde sieht, und wie schnell der erste Deploy mit LocalForge gelingt.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="reveal text-center p-8 rounded-2xl" style="background:rgba(224,104,32,.07);border:1px solid rgba(224,104,32,.25);">
+          <span class="block stat-value font-black leading-none mb-3 tabular-nums" style="color:#E06820;" data-target="16">0</span>
+          <span class="block text-lg font-semibold mb-1" style="color:#f0f0f2;">Stunden Setup-Aufwand im Schnitt</span>
+          <span class="block text-xs" style="color:#7a7a88;">ohne Starter für Next.js + TypeScript + Supabase + CI/CD</span>
+        </div>
+        <div class="reveal text-center p-8 rounded-2xl" style="background:rgba(224,104,32,.07);border:1px solid rgba(224,104,32,.25);">
+          <span class="block stat-value font-black leading-none mb-3 tabular-nums" style="color:#E06820;" data-target="78" data-suffix="%">0</span>
+          <span class="block text-lg font-semibold mb-1" style="color:#f0f0f2;">nennen Boilerplate als größte Hürde</span>
+          <span class="block text-xs" style="color:#7a7a88;">beim Start neuer Full-Stack-Projekte laut Entwicklerumfragen</span>
+        </div>
+        <div class="reveal text-center p-8 rounded-2xl" style="background:rgba(224,104,32,.07);border:1px solid rgba(224,104,32,.25);">
+          <span class="block text-xs font-semibold mb-2 uppercase tracking-[0.12em]" style="color:#E8832A;">unter</span>
+          <span class="block stat-value font-black leading-none mb-1 tabular-nums" style="color:#E06820;" data-target="5">0</span>
+          <span class="block text-sm font-semibold mb-2" style="color:#d3d3da;">Minuten</span>
+          <span class="block text-lg font-semibold mb-1" style="color:#f0f0f2;">bis zum ersten Deploy mit LocalForge</span>
+          <span class="block text-xs" style="color:#7a7a88;">nach git clone, npm install und .env.local konfigurieren</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 md:py-32 section-dark" id="warum" style="background:#050508;">
+    <div class="max-w-[1100px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-14">
+        <h2 class="reveal text-3xl md:text-5xl font-bold leading-[1.1] tracking-tight mb-5" style="color:#f0f0f2;">Warum LocalForge</h2>
+        <p class="reveal text-lg max-w-[650px] mx-auto leading-relaxed" style="color:#9999a1;">Vier klare Vorteile für Entwickler, die sofort produktiv sein wollen, ohne Zeit mit Konfiguration zu verlieren.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="reveal p-7 rounded-2xl card-hover" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);">
+          <h3 class="text-xl font-bold mb-3" style="color:#f0f0f2;">Sofort startklar</h3>
+          <p style="color:#9a9aaa;">Kein Boilerplate von Null. TypeScript, Tailwind, Supabase und CI/CD sind fertig konfiguriert.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl card-hover" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);">
+          <h3 class="text-xl font-bold mb-3" style="color:#f0f0f2;">Vollständig typisiert</h3>
+          <p style="color:#9a9aaa;">TypeScript strict mode ist von Anfang an aktiv. Keine any-Typen, keine unerwarteten Fehler in Production.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl card-hover" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);">
+          <h3 class="text-xl font-bold mb-3" style="color:#f0f0f2;">Backend inklusive</h3>
+          <p style="color:#9a9aaa;">Supabase mit PostgreSQL, Authentifizierung und Row-Level Security ist vollständig integriert und einsatzbereit.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl card-hover" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);">
+          <h3 class="text-xl font-bold mb-3" style="color:#f0f0f2;">CI/CD ab Tag 1</h3>
+          <p style="color:#9a9aaa;">GitHub Actions + Vercel-Deployment-Pipeline ist konfiguriert. Push → Build → Deploy – kein manueller Aufwand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="funktionen" class="py-24 section-alt">
+    <div class="max-w-[1100px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-14">
+        <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mb-4">Kernfunktionen, die euch entlasten</h2>
+        <p class="reveal text-lg max-w-[680px] mx-auto" style="color:var(--color-muted);">Alle wichtigen Bausteine eines modernen Full-Stack-Projekts in einer klaren, produktionsreifen Konfiguration.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <article class="reveal p-7 rounded-2xl bg-white border card-hover accent-hover">
+          <h3 class="text-xl font-bold mb-3">Next.js 16 App Router</h3>
+          <p style="color:var(--color-muted);">Server Components by default, async params und cookies – vollständig Next.js-16-konform und zukunftssicher.</p>
+        </article>
+        <article class="reveal p-7 rounded-2xl bg-white border card-hover accent-hover">
+          <h3 class="text-xl font-bold mb-3">TypeScript Strict Mode</h3>
+          <p style="color:var(--color-muted);">Striktes Typsystem für alle Komponenten, Server Actions und API-Routen. Kein any, keine Überraschungen.</p>
+        </article>
+        <article class="reveal p-7 rounded-2xl bg-white border card-hover accent-hover">
+          <h3 class="text-xl font-bold mb-3">Tailwind CSS v4</h3>
+          <p style="color:var(--color-muted);">Utility-first Styling der neuesten Generation. Mobile-first, kein Legacy-Config, kein @apply-Chaos.</p>
+        </article>
+        <article class="reveal p-7 rounded-2xl bg-white border card-hover accent-hover">
+          <h3 class="text-xl font-bold mb-3">Supabase-Integration</h3>
+          <p style="color:var(--color-muted);">PostgreSQL-Datenbank, Auth, RLS und Storage sind vorkonfiguriert und mit dem korrekten Server/Client-Split integriert.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 section-dark" id="process" style="background:#090a0e;">
+    <div class="max-w-[1100px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-10">
+        <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mb-4" style="color:#f0f0f2;">Hauptprozess als Entwicklungsfluss</h2>
+        <p class="reveal text-lg max-w-[760px] mx-auto" style="color:#a2a2ab;">Das Ziel von LocalForge: vom leeren Repo zum produktiven Launch mit minimalem Setup-Aufwand.</p>
+      </div>
+      <div class="reveal process-shell" id="processFlow">
+        <div class="process-track">
+          <div class="process-track__bar" id="processFlowBar"></div>
+          <div class="process-track__dot" id="processFlowDot"></div>
+        </div>
+        <div class="process-grid">
+          <article class="process-step process-step--active" tabindex="0">
+            <div class="process-step__index">01</div>
+            <h3 class="process-step__title">Repo klonen</h3>
+            <p class="process-step__text">git clone und npm install – kein manuelles Einrichten von Configs. In Minuten startklar.</p>
+            <p class="process-step__hint">Zum Aufklappen klicken</p>
+            <div class="process-step__more">Alle Konfigurationen – TypeScript, ESLint, Tailwind, Supabase-Client – sind bereits fertig eingerichtet.</div>
+          </article>
+          <article class="process-step" tabindex="0">
+            <div class="process-step__index">02</div>
+            <h3 class="process-step__title">Stack verbinden</h3>
+            <p class="process-step__text">.env.local mit Supabase-URL und Keys befüllen. Typen mit einem Befehl generieren.</p>
+            <p class="process-step__hint">Zum Aufklappen klicken</p>
+            <div class="process-step__more">npm run dev startet den lokalen Dev-Server und verbindet sich automatisch mit eurem Supabase-Projekt.</div>
+          </article>
+          <article class="process-step" tabindex="0">
+            <div class="process-step__index">03</div>
+            <h3 class="process-step__title">Feature bauen</h3>
+            <p class="process-step__text">Server Components, Datenbankabfragen und Auth-Flows direkt produktiv einsetzen.</p>
+            <p class="process-step__hint">Zum Aufklappen klicken</p>
+            <div class="process-step__more">Der Stack ist auf maximale Entwicklungsgeschwindigkeit ausgelegt. Kein Setup-Overhead, direkt Mehrwert liefern.</div>
+          </article>
+          <article class="process-step" tabindex="0">
+            <div class="process-step__index">04</div>
+            <h3 class="process-step__title">Automatisch deployen</h3>
+            <p class="process-step__text">Jeder Push startet die GitHub-Actions-Pipeline und deployed automatisch auf Vercel.</p>
+            <p class="process-step__hint">Zum Aufklappen klicken</p>
+            <div class="process-step__more">Ergebnis: Ein verlässlicher CI/CD-Flow, bei dem Code-Reviews und Deployments nahtlos ineinandergreifen.</div>
+          </article>
+        </div>
+        <p class="process-target"><strong>Ziel:</strong> Weniger Konfigurationszeit, mehr Entwicklungszeit – produktiv ab dem ersten Commit.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 section-dark" style="background:#0f1117;" id="ablauf">
+    <div class="max-w-[1000px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-12">
+        <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mb-4" style="color:#f0f0f2;">So funktioniert es in 3 Schritten</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="reveal p-7 rounded-2xl" style="background:rgba(224,104,32,.08);border:1px solid rgba(224,104,32,.25);">
+          <span class="text-sm font-bold uppercase tracking-wider" style="color:#E8832A;">Schritt 1</span>
+          <h3 class="text-xl font-bold mt-2 mb-2" style="color:#f0f0f2;">Repository klonen</h3>
+          <p style="color:#9a9aaa;">npm install ausführen und alle Abhängigkeiten installieren. Fertig in unter zwei Minuten.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl" style="background:rgba(224,104,32,.08);border:1px solid rgba(224,104,32,.25);">
+          <span class="text-sm font-bold uppercase tracking-wider" style="color:#E8832A;">Schritt 2</span>
+          <h3 class="text-xl font-bold mt-2 mb-2" style="color:#f0f0f2;">Umgebung konfigurieren</h3>
+          <p style="color:#9a9aaa;">Supabase-Credentials in .env.local einsetzen und npm run dev starten.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl" style="background:rgba(224,104,32,.08);border:1px solid rgba(224,104,32,.25);">
+          <span class="text-sm font-bold uppercase tracking-wider" style="color:#E8832A;">Schritt 3</span>
+          <h3 class="text-xl font-bold mt-2 mb-2" style="color:#f0f0f2;">Entwickeln &amp; deployen</h3>
+          <p style="color:#9a9aaa;">Features bauen und mit jedem Push automatisch über GitHub Actions auf Vercel deployen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24" id="faq">
+    <div class="max-w-[900px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-10">
+        <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mb-4">Häufige Fragen</h2>
+      </div>
+      <div id="faqList" class="rounded-2xl bg-white border overflow-hidden">
+        <div class="faq-item">
+          <button class="faq-question w-full text-left px-6 py-5 flex items-center justify-between">
+            <span class="font-semibold">Welche Vorkenntnisse sind nötig?</span>
+            <span class="faq-question__icon relative w-5 h-5"></span>
+          </button>
+          <div class="faq-answer px-6 pb-5" style="color:var(--color-muted);">Grundkenntnisse in Next.js und TypeScript genügen. Supabase- und Vercel-Konten werden für das Deployment benötigt.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question w-full text-left px-6 py-5 flex items-center justify-between">
+            <span class="font-semibold">Ist LocalForge kostenlos?</span>
+            <span class="faq-question__icon relative w-5 h-5"></span>
+          </button>
+          <div class="faq-answer px-6 pb-5" style="color:var(--color-muted);">Ja, LocalForge ist Open-Source und kostenlos nutzbar. Lediglich Supabase und Vercel haben eigene Preistarife.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question w-full text-left px-6 py-5 flex items-center justify-between">
+            <span class="font-semibold">Kann ich LocalForge mit meinem bestehenden Supabase-Projekt verbinden?</span>
+            <span class="faq-question__icon relative w-5 h-5"></span>
+          </button>
+          <div class="faq-answer px-6 pb-5" style="color:var(--color-muted);">Ja. Einfach die Supabase-URL und den Anon Key in .env.local einsetzen und mit npm run dev starten.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question w-full text-left px-6 py-5 flex items-center justify-between">
+            <span class="font-semibold">Unterstützt LocalForge Mehrsprachigkeit?</span>
+            <span class="faq-question__icon relative w-5 h-5"></span>
+          </button>
+          <div class="faq-answer px-6 pb-5" style="color:var(--color-muted);">Ja, die Architektur unterstützt next-intl mit Deutsch und Englisch als Standardsprachen.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 section-dark" id="final-cta" style="background:#050508;">
+    <div class="max-w-[900px] mx-auto px-5 md:px-10 text-center">
+      <h2 class="reveal text-3xl md:text-5xl font-black leading-[1.1] mb-5" style="color:#f0f0f2;">Starte jetzt mit LocalForge und sei ab dem ersten Commit produktiv.</h2>
+      <p class="reveal text-lg max-w-[620px] mx-auto mb-9" style="color:#9a9aaa;">Open-Source, sofort deploybar und auf das Wesentliche reduziert.</p>
+      <div class="reveal flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://localforge.vercel.app/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;padding:14px 30px;background:#E06820;color:#fff;font-weight:700;border-radius:12px;text-decoration:none;">Jetzt LocalForge starten</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#050508;color:#8e8e93;padding:32px 20px 40px;text-align:center;border-top:1px solid rgba(255,255,255,.08);">
+    <div class="flex items-center justify-center gap-2 mb-2">
+      <img src="app-icon-light.svg" alt="LocalForge" style="width:18px;height:18px;opacity:.85;">
+      <span style="font-weight:700;color:#f0f0f2;">LocalForge</span>
+    </div>
+    <p style="font-size:.9rem;">Vorkonfigurierter Next.js-Starter für produktive Entwicklung.</p>
+    <div style="margin-top:12px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:.85rem;">
+      <a href="https://localforge.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:#F0A060;text-decoration:none;">App öffnen</a>
+      <a href="impressum.html" style="color:#F0A060;text-decoration:none;">Impressum</a>
+      <a href="agb.html" style="color:#F0A060;text-decoration:none;">AGB</a>
+      <a href="datenschutz.html" style="color:#F0A060;text-decoration:none;">Datenschutz</a>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Nach oben">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie-Hinweis">
+    <div class="cookie-banner__inner">
+      <h3 style="font-weight:700;font-size:1.05rem;margin-bottom:.45rem;">Hinweis zu lokalem Speicher</h3>
+      <p style="font-size:.92rem;line-height:1.6;color:#4d4d55;">LocalForge nutzt lokalen Browser-Speicher für Einstellungen und Präferenzen. Es gibt keine Pflicht-Cloud und keine Werbe-Tracker.</p>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:1rem;flex-wrap:wrap;">
+        <button class="cookie-banner__btn cookie-banner__btn--reject" data-cookie-action="reject">Schließen</button>
+        <button class="cookie-banner__btn cookie-banner__btn--accept" data-cookie-action="accept">Verstanden</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
